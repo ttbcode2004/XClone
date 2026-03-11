@@ -17,7 +17,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use(clerkMiddleware());
-app.use(clerkMiddleware());
 
 if (ENV.NODE_ENV === "production") {
   app.use(arcjetMiddleware);

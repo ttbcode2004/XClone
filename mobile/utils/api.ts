@@ -1,9 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { useAuth } from "@clerk/clerk-expo";
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || "https://x-clone-rn.vercel.app/api";
-// ! 🔥 localhost api would not work on your actual physical device
-// const API_BASE_URL = "http://localhost:5001/api";
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || "https://x-clone-three-sable.vercel.app";
 
 // this will basically create an authenticated api, pass the token into our headers
 export const createApiClient = (getToken: () => Promise<string | null>): AxiosInstance => {
@@ -26,7 +24,7 @@ export const useApiClient = (): AxiosInstance => {
 };
 
 export const userApi = {
-  syncUser: (api: AxiosInstance) => api.post("/users/sync"),
+  syncUser: (api: AxiosInstance, data: any) => api.post("/users/sync", data),
   getCurrentUser: (api: AxiosInstance) => api.get("/users/me"),
   updateProfile: (api: AxiosInstance, data: any) => api.put("/users/profile", data),
 };

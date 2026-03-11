@@ -3,7 +3,7 @@ import User from "../models/user.model.js";
 import Notification from "../models/notification.model.js";
 
 import { getAuth } from "@clerk/express";
-import { clerkClient } from "@clerk/express";
+import { clerkClient } from "@clerk/backend";
 
 export const getUserProfile = asyncHandler(async (req, res) => {
   const { username } = req.params;
@@ -25,6 +25,9 @@ export const updateProfile = asyncHandler(async (req, res) => {
 
 export const syncUser = asyncHandler(async (req, res) => {
   const { userId } = getAuth(req);
+    if (!userId) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
 
   // check if user already exists in mongodb
   const existingUser = await User.findOne({ clerkId: userId });
