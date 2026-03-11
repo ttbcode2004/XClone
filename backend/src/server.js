@@ -35,22 +35,13 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: err.message || "Internal server error" });
 });
 
+connectDB();
 
-const startServer = async () => {
-  try {
-    await connectDB();
-
-    if (process.env.NODE_ENV !== "production") {
-      app.listen(ENV.PORT, () => {
-        console.log("Server running on", ENV.PORT);
-      });
-    }
-  } catch (error) {
-    console.error("Failed to start server:", error);
-  }
-};
-
-startServer();
+if (process.env.NODE_ENV !== "production") {
+  app.listen(ENV.PORT, () => {
+    console.log("Server running on", ENV.PORT);
+  });
+}
 
 export default app;
 
