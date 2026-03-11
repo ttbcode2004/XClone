@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { useAuth } from "@clerk/clerk-expo";
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || "https://x-clone-three-sable.vercel.app";
+const API_BASE_URL = "https://x-clone-three-sable.vercel.app/api"; // replace with your actual backend URL
 
 // this will basically create an authenticated api, pass the token into our headers
 export const createApiClient = (getToken: () => Promise<string | null>): AxiosInstance => {
@@ -9,6 +9,9 @@ export const createApiClient = (getToken: () => Promise<string | null>): AxiosIn
 
   api.interceptors.request.use(async (config) => {
     const token = await getToken();
+    console.log('====================================');
+    console.log(token);
+    console.log('====================================');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

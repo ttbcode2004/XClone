@@ -6,11 +6,7 @@ import { RefreshControl, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function index() {
-  const { user } = useUser();
-
-console.log(user);
-
-  useUserSync(); // just to make sure user is loaded and synced before rendering the screen
+  useUserSync();
   return (
     <SafeAreaView className="flex-1 bg-white">
         <View className="flex-row justify-between items-center px-4 py-3 border-b border-gray-100">

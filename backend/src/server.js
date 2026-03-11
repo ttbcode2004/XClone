@@ -18,9 +18,9 @@ app.use(express.json());
 
 app.use(clerkMiddleware());
 
-if (ENV.NODE_ENV === "production") {
-  app.use(arcjetMiddleware);
-}
+// if (ENV.NODE_ENV === "production") {
+//   app.use(arcjetMiddleware);
+// }
 
 app.get("/", (req, res) => res.send("Hello from server"));
 
