@@ -22,7 +22,7 @@ app.use(clerkMiddleware());
 //   app.use(arcjetMiddleware);
 // }
 
-app.get("/", (req, res) => res.send("Hello from server"));
+app.get("/test", (req, res) => res.status(200).json({ message: "Test endpoint is working" }));
 
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
