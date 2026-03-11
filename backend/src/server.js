@@ -17,7 +17,11 @@ app.use(cors());
 app.use(express.json());
 
 app.use(clerkMiddleware());
-app.use(arcjetMiddleware);
+app.use(clerkMiddleware());
+
+if (ENV.NODE_ENV === "production") {
+  app.use(arcjetMiddleware);
+}
 
 app.get("/", (req, res) => res.send("Hello from server"));
 
@@ -32,21 +36,22 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: err.message || "Internal server error" });
 });
 
+
 const startServer = async () => {
   try {
     await connectDB();
 
-    // listen for local development
-    if (ENV.NODE_ENV !== "production") {
-      app.listen(ENV.PORT, () => console.log("Server is up and running on PORT:", ENV.PORT));
+    if (process.env.NODE_ENV !== "production") {
+      app.listen(ENV.PORT, () => {
+        console.log("Server running on", ENV.PORT);
+      });
     }
   } catch (error) {
-    console.error("Failed to start server:", error.message);
-    process.exit(1);
+    console.error("Failed to start server:", error);
   }
 };
 
 startServer();
 
-// export for vercel
 export default app;
+
