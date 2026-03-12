@@ -1,11 +1,12 @@
+import PostComposer from "@/components/PostComposer";
+import PostsList from "@/components/PostsList";
 import SignOutButton from "@/components/SignOutButton";
 import { useUserSync } from "@/hooks/useUserSync";
-import { useUser } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
 import { RefreshControl, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function index() {
+export default function HomeScreen() {
   useUserSync();
   return (
     <SafeAreaView className="flex-1 bg-white">
@@ -27,8 +28,8 @@ export default function index() {
         //   />
         // }
       >
-        {/* <PostComposer />
-        <PostsList /> */}
+        <PostComposer />
+        <PostsList />
       </ScrollView>
     </SafeAreaView>
   )
